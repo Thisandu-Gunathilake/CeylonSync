@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Home() {
   return (
@@ -21,6 +22,18 @@ export default function Home() {
           Through Sri Lanka <br />
           Begins Here.
         </h1>
+
+        {/* Plan your voyage button */}
+        <button
+          className="group flex items-center gap-2 px-8 py-3 rounded-full text-[#3A2E12] font-semibold tracking-wide hover:scale-105 transition-transform"
+          style={{
+            background: "linear-gradient(135deg, #d4af37, #f2d388, #d4af37)",
+            boxShadow: "0 4px 20px rgba(212, 175, 55, 0.4)",
+          }}
+        >
+          PLAN YOUR VOYAGE
+          <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+        </button>
       </div>
     </main>
   );
