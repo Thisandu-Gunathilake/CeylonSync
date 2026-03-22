@@ -30,6 +30,15 @@ export default function Navbar() {
         <button className="text-white hover:text-white/70 hidden md:block">
           Login
         </button>
+        <button
+          className="px-6 py-2 rounded-full text-[#3A2E12] font-semibold text-sm transition-transform hover:scale-105"
+          style={{
+            background: "linear-gradient(135deg, #d4af37 0%, #f2d388 100%)",
+            boxShadow: "0 0 20px rgba(212, 175, 55, 0.4)",
+          }}
+        >
+          Book Now
+        </button>
       </div>
     </nav>
   );
