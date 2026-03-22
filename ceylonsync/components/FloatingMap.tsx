@@ -14,6 +14,15 @@ const destinationsData: LocationData[] = [
     imageUrl: "/images/kandy-card.png", 
     position: { top: "55%", left: "60%" }, 
   },
+
+  {
+    id: "sigiriya",
+    name: "SIGIRIYA",
+    tagline: "The Lion Rock",
+    description: "Climb the ancient rock fortress and discover the palace in the sky.",
+    imageUrl: "/images/sigiriya-card.png", 
+    position: { top: "40%", left: "45%" },
+  }
 ];
 
 export default function FloatingMap() {
