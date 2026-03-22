@@ -17,13 +17,13 @@ export default function Navbar() {
       {/* Centered Links (Hidden on mobile) */}
       <div className="hidden md:flex items-center gap-8 px-8 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 shadow-lg">
         <a href="#" className="hover:text-white transition">
-          Experiences
+          Search
         </a>
         <a href="#" className="hover:text-white transition">
-          Wellness
+          Explore
         </a>
         <a href="#" className="hover:text-white transition">
-          Journeys
+          Destinations
         </a>
         <a href="#" className="hover:text-white transition">
           About Us
@@ -63,19 +63,19 @@ export default function Navbar() {
             href="#"
             className="text-white text-lg font-medium hover:text-[#d4af37]"
           >
-            Experiences
+            Search
           </a>
           <a
             href="#"
             className="text-white text-lg font-medium hover:text-[#d4af37]"
           >
-            Wellness
+            Explore
           </a>
           <a
             href="#"
             className="text-white text-lg font-medium hover:text-[#d4af37]"
           >
-            Journeys
+            Destinations
           </a>
           <a
             href="#"
