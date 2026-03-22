@@ -10,7 +10,7 @@ export default function Home() {
       <Navbar />
 
       {/* 3. Simple CSS Grid with 2-column layout */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-28 lg:pt-32 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-28 lg:pt-24 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
         
         {/* LEFT COLUMN */}
         <div className="space-y-4 lg:space-y-6 mt-8 lg:mt-0 flex flex-col items-center lg:items-start text-center lg:text-left">
