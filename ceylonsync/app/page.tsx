@@ -15,6 +15,12 @@ export default function Home() {
         <p className="text-white/80 tracking-widest text-sm font-medium uppercase">
           Ascend. Explore. Awaken.
         </p>
+
+        <h1 className="text-white text-5xl lg:text-7xl leading-tight font-serif">
+          Your Immersive Journey <br />
+          Through Sri Lanka <br />
+          Begins Here.
+        </h1>
       </div>
     </main>
   );
