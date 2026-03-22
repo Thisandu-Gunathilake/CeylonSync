@@ -7,10 +7,10 @@ export default function Home() {
     // style attribute to load your image
     <main
       className="relative min-h-screen flex items-center bg-cover bg-center bg-no-repeat overflow-hidden"
-      style={{ backgroundImage: "url('/images/background.jpg')" }} // <-- Put your exact image name here!
+      style={{ backgroundImage: "url('/images/background.jpg')" }}
     >
       {/* Added a subtle dark overlay */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
+      <div className="absolute inset-0 bg-black/10 z-0"></div>
 
       {/*Importing navbar*/}
       <Navbar />
@@ -43,8 +43,14 @@ export default function Home() {
         </div>
 
         {/* RIGHT COLUMN */}
-        <div className="h-[350px] lg:h-[600px] w-full mt-8 lg:mt-0">
-          <FloatingMap />
+        <div className="flex flex-col items-center w-full mt-8 lg:mt-0">
+          <div className="h-[350px] lg:h-[600px] w-full">
+            <FloatingMap />
+          </div>
+
+          <p className="relative z-20 w-full text-right pr-30 lg:pr-15 text-white/70 text-sm -mt-8 lg:-mt-20 tracking-widest font-light animate-pulse">
+            Click on dots in the map
+          </p>
         </div>
       </div>
     </main>
