@@ -64,7 +64,7 @@ export default function FloatingMap() {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="relative z-10 w-full flex items-center justify-center"
       >
-        <div className="relative w-[120%] mx-auto -translate-x-20 lg:translate-x-0 lg:w-[130%] max-w-[600px] lg:max-w-[1000px] scale-125 lg:scale-150">
+        <div className="relative w-[150%] mx-auto -translate-x-77 lg:translate-x-0 lg:w-[130%] max-w-[600px] lg:max-w-[1000px] scale-[2.2] lg:scale-150 origin-left lg:origin-center">
           
           <Image
             src="/images/map.png"
