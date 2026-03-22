@@ -4,14 +4,19 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Home() {
   return (
-    // 1. Combined background gradient directly into the main tag
-    <main className="relative min-h-screen flex items-center bg-gradient-to-br from-[#1e3a4a] via-[#0f2027] to-[#203a43] overflow-hidden">
+    // style attribute to load your image
+    <main
+      className="relative min-h-screen flex items-center bg-cover bg-center bg-no-repeat overflow-hidden"
+      style={{ backgroundImage: "url('/images/background.jpg')" }} // <-- Put your exact image name here!
+    >
+      {/* Added a subtle dark overlay */}
+      <div className="absolute inset-0 bg-black/40 z-0"></div>
+
       {/*Importing navbar*/}
       <Navbar />
 
-      {/* 3. Simple CSS Grid with 2-column layout */}
+      {/*Simple CSS Grid with 2-column layout */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-28 lg:pt-24 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
-        
         {/* LEFT COLUMN */}
         <div className="space-y-4 lg:space-y-6 mt-8 lg:mt-0 flex flex-col items-center lg:items-start text-center lg:text-left">
           <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase">
