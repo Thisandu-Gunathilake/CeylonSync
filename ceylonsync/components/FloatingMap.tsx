@@ -31,9 +31,7 @@ const destinationsData: LocationData[] = [
     description: "Experience the scenic beauty of the hill country and visit the famous Nine Arch Bridge.",
     imageUrl: "/images/ella-card.png", 
     position: { top: "64%", left: "67%" },
-  }
-
-  ,
+  },
 
   {
     id: "Galle",
@@ -42,6 +40,15 @@ const destinationsData: LocationData[] = [
     description: "Explore the UNESCO World Heritage Site and experience the charm of this coastal city.",
     imageUrl: "/images/galle-card.png", 
     position: { top: "84%", left: "49%" },
+  },
+
+  {
+    id: "Yala",
+    name: "YALA",
+    tagline: "National Park",
+    description: "Witness the incredible wildlife of Sri Lanka in their natural habitat.",
+    imageUrl: "/images/yala-card.png", 
+    position: { top: "79%", left: "75%" },
   }
 ];
 
