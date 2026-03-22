@@ -14,7 +14,6 @@ const destinationsData: LocationData[] = [
     imageUrl: "/images/kandy-card.png", 
     position: { top: "53%", left: "60%" }, 
   },
-
   {
     id: "sigiriya",
     name: "SIGIRIYA",
@@ -23,7 +22,6 @@ const destinationsData: LocationData[] = [
     imageUrl: "/images/sigiriya-card.png", 
     position: { top: "40%", left: "60%" },
   },
-
   {
     id: "ella",
     name: "ELLA",
@@ -32,7 +30,6 @@ const destinationsData: LocationData[] = [
     imageUrl: "/images/ella-card.png", 
     position: { top: "64%", left: "67%" },
   },
-
   {
     id: "Galle",
     name: "GALLE",
@@ -41,7 +38,6 @@ const destinationsData: LocationData[] = [
     imageUrl: "/images/galle-card.png", 
     position: { top: "84%", left: "49%" },
   },
-
   {
     id: "Yala",
     name: "YALA",
@@ -53,26 +49,23 @@ const destinationsData: LocationData[] = [
 ];
 
 export default function FloatingMap() {
-  // 2. State to track which dot was clicked
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(null);
 
-  // 3. Find the data for the clicked location to pass to the card
   const activeLocationData = destinationsData.find(
     (loc) => loc.id === selectedLocationId
   );
 
   return (
     <div className="relative flex items-center justify-center w-full h-full overflow-visible">
+      
       {/* Sri Lankan Map */}
       <motion.div
         animate={{ x: [-10, 10, -10] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="relative z-10 w-full flex items-center justify-center"
       >
-        {/* WRAPPER: We moved your sizing/scaling classes here so the dots and image scale together perfectly */}
-        <div className="relative w-[120%] mx-auto -translate-x-20 lg:translate-x-0 lg:w-[120%] max-w-[600px] lg:max-w-[800px] scale-125">
+        <div className="relative w-[120%] mx-auto -translate-x-20 lg:translate-x-0 lg:w-[130%] max-w-[600px] lg:max-w-[1000px] scale-125 lg:scale-150">
           
-          {/* THE MAP IMAGE */}
           <Image
             src="/images/map.png"
             alt="Sri Lanka Map"
@@ -90,32 +83,28 @@ export default function FloatingMap() {
               className="absolute z-20 group -translate-x-1/2 -translate-y-1/2"
               style={{ top: location.position.top, left: location.position.left }}
             >
-              {/* Pulsing UI */}
               <span className="relative flex h-4 w-4 sm:h-5 sm:w-5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d4af37] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-4 w-4 sm:h-5 sm:w-5 bg-[#d4af37] border-2 border-[#1e3a4a] group-hover:scale-125 transition-transform duration-300 shadow-lg"></span>
               </span>
             </button>
           ))}
-
-          {/* THE POPUP CARD */}
-          {activeLocationData && (
-            <div 
-              className="absolute z-50 w-max -translate-x-1/2 mt-4 lg:translate-x-4 lg:-translate-y-1/2 lg:mt-0"
-              style={{ 
-                top: activeLocationData.position.top, 
-                left: activeLocationData.position.left,
-              }}
-            >
-              <LocationCard 
-                data={activeLocationData} 
-                onClose={() => setSelectedLocationId(null)} 
-              />
-            </div>
-          )}
           
         </div>
       </motion.div>
+
+      {/* THE POPUP CARD */}
+      {activeLocationData && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+          <div className="pointer-events-auto">
+            <LocationCard 
+              data={activeLocationData} 
+              onClose={() => setSelectedLocationId(null)} 
+            />
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
