@@ -8,6 +8,8 @@ export default function Home() {
       {/*Importing navbar*/}
       <Navbar />
 
+      {/* 3. Simple CSS Grid with 2-column layout */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-12"></div>
       
     </main>
   );
