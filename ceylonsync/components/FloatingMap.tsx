@@ -11,7 +11,7 @@ const destinationsData: LocationData[] = [
     name: "KANDY",
     tagline: "The Hill Capital",
     description: "Explore historic temples and the cultural heart of Sri Lanka.",
-    imageUrl: "/images/kandy-card.png", 
+    imageUrl: "/images/kandy-card.jpg", 
     position: { top: "53%", left: "60%" }, 
   },
   {
@@ -19,7 +19,7 @@ const destinationsData: LocationData[] = [
     name: "SIGIRIYA",
     tagline: "The Lion Rock",
     description: "Climb the ancient rock fortress and discover the palace in the sky.",
-    imageUrl: "/images/sigiriya-card.png", 
+    imageUrl: "/images/sigiriya-card.jpeg", 
     position: { top: "40%", left: "60%" },
   },
   {
@@ -27,7 +27,7 @@ const destinationsData: LocationData[] = [
     name: "ELLA",
     tagline: "Nine Arches Bridge",
     description: "Experience the scenic beauty of the hill country and visit the famous Nine Arch Bridge.",
-    imageUrl: "/images/ella-card.png", 
+    imageUrl: "/images/ella-card.jpg", 
     position: { top: "64%", left: "67%" },
   },
   {
@@ -35,7 +35,7 @@ const destinationsData: LocationData[] = [
     name: "GALLE",
     tagline: "Historic Galle Fort",
     description: "Explore the UNESCO World Heritage Site and experience the charm of this coastal city.",
-    imageUrl: "/images/galle-card.png", 
+    imageUrl: "/images/galle-card.jpg", 
     position: { top: "84%", left: "49%" },
   },
   {
@@ -43,7 +43,7 @@ const destinationsData: LocationData[] = [
     name: "YALA",
     tagline: "National Park",
     description: "Witness the incredible wildlife of Sri Lanka in their natural habitat.",
-    imageUrl: "/images/yala-card.png", 
+    imageUrl: "/images/yala-card.jpg", 
     position: { top: "79%", left: "75%" },
   }
 ];
