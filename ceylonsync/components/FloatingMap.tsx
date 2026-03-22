@@ -32,6 +32,17 @@ const destinationsData: LocationData[] = [
     imageUrl: "/images/ella-card.png", 
     position: { top: "64%", left: "67%" },
   }
+
+  ,
+
+  {
+    id: "Galle",
+    name: "GALLE",
+    tagline: "Historic Galle Fort",
+    description: "Explore the UNESCO World Heritage Site and experience the charm of this coastal city.",
+    imageUrl: "/images/galle-card.png", 
+    position: { top: "84%", left: "49%" },
+  }
 ];
 
 export default function FloatingMap() {
