@@ -9,7 +9,7 @@ export default function Navbar() {
         CeylonSync
       </div>
 
-      {/* Center Links */}
+      {/* Centered Links*/}
       <div className="hidden md:flex items-center gap-8 px-8 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 shadow-lg">
         <a href="#" className="hover:text-white transition">
           Experiences
@@ -23,6 +23,13 @@ export default function Navbar() {
         <a href="#" className="hover:text-white transition">
           About Us
         </a>
+      </div>
+
+      {/* Right Side buttons */}
+      <div className="flex items-center gap-6">
+        <button className="text-white hover:text-white/70 hidden md:block">
+          Login
+        </button>
       </div>
     </nav>
   );
