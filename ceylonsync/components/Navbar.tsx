@@ -37,7 +37,7 @@ export default function Navbar() {
             boxShadow: "0 0 20px rgba(212, 175, 55, 0.4)",
           }}
         >
-          Book Now
+          Plan Now
         </button>
       </div>
     </nav>
