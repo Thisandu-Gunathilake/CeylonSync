@@ -12,7 +12,7 @@ const destinationsData: LocationData[] = [
     tagline: "The Hill Capital",
     description: "Explore historic temples and the cultural heart of Sri Lanka.",
     imageUrl: "/images/kandy-card.png", 
-    position: { top: "55%", left: "60%" }, 
+    position: { top: "53%", left: "60%" }, 
   },
 
   {
@@ -21,7 +21,16 @@ const destinationsData: LocationData[] = [
     tagline: "The Lion Rock",
     description: "Climb the ancient rock fortress and discover the palace in the sky.",
     imageUrl: "/images/sigiriya-card.png", 
-    position: { top: "40%", left: "45%" },
+    position: { top: "40%", left: "60%" },
+  },
+
+  {
+    id: "ella",
+    name: "ELLA",
+    tagline: "Nine Arches Bridge",
+    description: "Experience the scenic beauty of the hill country and visit the famous Nine Arch Bridge.",
+    imageUrl: "/images/ella-card.png", 
+    position: { top: "64%", left: "67%" },
   }
 ];
 
