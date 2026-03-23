@@ -11,7 +11,7 @@ export default function Navbar() {
       <nav className="relative w-full py-2 px-4 sm:px-6 lg:px-12 flex justify-between items-center max-w-7xl mx-auto">
 
         {/* Logo */}
-        <div className="text-white text-xl sm:text-2xl font-semibold tracking-tight">
+        <div className="text-white text-xl sm:text-2xl font-sans font-semibold tracking-tight">
           Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
         </div>
 
