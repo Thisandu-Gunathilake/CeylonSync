@@ -2,6 +2,15 @@ import Navbar from "../components/Navbar";
 import FloatingMap from "../components/FloatingMap";
 import { ArrowUpRight } from "lucide-react";
 
+// 1. Destination data for pre-loading (must match the images used in FloatingMap)
+const destinationsData = [
+  { id: "kandy", imageUrl: "/images/kandy-card.jpg" },
+  { id: "sigiriya", imageUrl: "/images/sigiriya-card.jpeg" },
+  { id: "ella", imageUrl: "/images/ella-card.jpg" },
+  { id: "Galle", imageUrl: "/images/galle-card.jpg" },
+  { id: "Yala", imageUrl: "/images/yala-card.jpg" },
+];
+
 export default function Home() {
   return (
     <main
@@ -48,6 +57,14 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* HIDDEN PRE-LOADER: This forces the browser to download the card images 
+          immediately so they appear instantly when a dot is clicked. */}
+      <div className="hidden" aria-hidden="true">
+        {destinationsData.map((dest) => (
+          <img key={dest.id} src={dest.imageUrl} alt="" />
+        ))}
       </div>
     </main>
   );
