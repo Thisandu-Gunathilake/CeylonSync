@@ -50,7 +50,7 @@ export default function Navbar() {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="absolute top-24 left-4 right-4 bg-black/60 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 flex flex-col gap-6 shadow-2xl md:hidden">
+          <div className="absolute top-24 left-4 right-4 bg-black/85 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 flex flex-col gap-6 shadow-2xl md:hidden">
             <a href="#" className="text-white text-lg font-medium">Search</a>
             <a href="#" className="text-white text-lg font-medium">Explore</a>
             <a href="#" className="text-white text-lg font-medium">Destinations</a>
