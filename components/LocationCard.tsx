@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
-import { motion } from "framer-motion"; // Removed AnimatePresence from here (it belongs in the parent)
+import { motion } from "framer-motion"; 
 
 // 1. Exporting the Data Interface so FloatingMap can use it
 export interface LocationData {
