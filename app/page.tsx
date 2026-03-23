@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "../components/Navbar";
 import FloatingMap from "../components/FloatingMap";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin, Facebook, Instagram, Twitter, Mail, Phone } from "lucide-react";
 
 const destinationsData = [
   { 
@@ -64,7 +64,8 @@ export default function Home() {
   const textScale = useTransform(scrollYProgress, [textStart, textMid, 1], [0.8, 1, 1]);
 
   return (
-    <main className="relative bg-[#ffffff]">
+    /* ADDED id="top" so the Navbar logo can navigate back here */
+    <main id="top" className="relative bg-[#ffffff]">
       <div className="fixed top-0 left-0 right-0 z-50">
         <Navbar />
       </div>
@@ -103,8 +104,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ALTERNATING CONTENT SECTION */}
-      <section className="relative z-10 bg-[#F9F7F2] py-24 px-6 lg:px-12 border-t border-black/5">
+      {/* ALTERNATING CONTENT SECTION - Ensure id="discover" and scroll-mt-20 are present */}
+      <section id="discover" className="relative z-10 bg-[#F9F7F2] py-24 px-6 lg:px-12 border-t border-black/5 scroll-mt-20">
         <div className="max-w-7xl mx-auto space-y-24 lg:space-y-40">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-16">
             <h2 className="text-[#0a0f16] text-4xl lg:text-6xl font-serif mb-6 italic">Discover the Soul of the Island</h2>
@@ -122,7 +123,6 @@ export default function Home() {
                 transition={{ duration: 0.7 }}
                 className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${!isEven ? 'lg:flex-row-reverse' : ''}`}
               >
-                {/* Image Container - HEIGHT REDUCED HERE */}
                 <div className="w-full lg:w-[40%] overflow-hidden rounded-2xl shadow-xl h-[250px] lg:h-[320px]">
                   <motion.img 
                     whileHover={{ scale: 1.05 }}
@@ -133,7 +133,6 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Content Container */}
                 <div className="w-full lg:w-[60%] space-y-6 flex flex-col items-start text-left">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-[#d4af37]" />
@@ -158,7 +157,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRELOAD IMAGES */}
+      {/* FOOTER START */}
+      <footer className="relative z-10 bg-[#0a0f16] text-white pt-20 pb-10 px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <div className="space-y-6">
+              <div className="text-2xl font-sans font-bold tracking-tight">
+                Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
+              </div>
+              <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+                {/* FIXED APOSTROPHE ERROR BY USING &apos; */}
+                Crafting immersive digital journeys through the heart of Sri Lanka. Discover the island&apos;s soul with our curated travel experiences.
+              </p>
+              <div className="flex gap-4">
+                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                  <Instagram className="w-5 h-5 group-hover:text-[#0a0f16]" />
+                </a>
+                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                  <Facebook className="w-5 h-5 group-hover:text-[#0a0f16]" />
+                </a>
+                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                  <Twitter className="w-5 h-5 group-hover:text-[#0a0f16]" />
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-serif mb-6">Quick Links</h4>
+              <ul className="space-y-4 text-sm text-white/60">
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Search Destinations</a></li>
+                <li><a href="#discover" className="hover:text-[#d4af37] transition-colors">Explore Map</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Plan Your Voyage</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Travel Stories</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-serif mb-6">Support</h4>
+              <ul className="space-y-4 text-sm text-white/60">
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Contact Us</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-serif mb-6">Get in Touch</h4>
+              <div className="space-y-4 text-sm text-white/60">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-[#d4af37] shrink-0" />
+                  <span>Colombo, Sri Lanka</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-[#d4af37] shrink-0" />
+                  <span>+94 11 234 5678</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-[#d4af37] shrink-0" />
+                  <span>hello@ceylonsync.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40 uppercase tracking-widest">
+            <p>© 2026 CeylonSync. All Rights Reserved.</p>
+            <p>Designed for the Modern Explorer</p>
+          </div>
+        </div>
+      </footer>
+
       <div className="hidden" aria-hidden="true">
         {destinationsData.map((dest) => (
           <img key={dest.id} src={dest.imageUrl} alt="" />
