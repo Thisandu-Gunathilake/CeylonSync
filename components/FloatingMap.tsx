@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // Added AnimatePresence
+import { motion, AnimatePresence } from "framer-motion"; 
 import Image from "next/image";
 import LocationCard, { LocationData } from "./LocationCard";
 
@@ -77,7 +77,7 @@ export default function FloatingMap() {
             width={800}
             height={800}
             priority
-            className="w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] object-contain"
+            className="w-full h-auto drop-shadow-[0_0_25px_rgba(0,0,0,0.9)] object-contain"
           />
 
           {/* THE GLOWING DOTS */}
@@ -101,7 +101,6 @@ export default function FloatingMap() {
       </motion.div>
 
       {/* THE POPUP CARD */}
-      {/* Wrapping the condition in AnimatePresence enables the 'exit' animation defined in LocationCard */}
       <AnimatePresence>
         {activeLocationData && (
           <div className="absolute inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
