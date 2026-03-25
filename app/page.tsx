@@ -351,11 +351,11 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-[#d4af37] shrink-0" />
-                  <span>+94 11 234 5678</span>
+                  <span>+94 70 449 0944</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-[#d4af37] shrink-0" />
-                  <span>hello@ceylonsync.com</span>
+                  <span>thisandugunathilake12345@gmail.com</span>
                 </div>
               </div>
             </div>
