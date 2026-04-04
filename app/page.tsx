@@ -130,9 +130,10 @@ export default function Home() {
 
             <motion.div 
               style={{ opacity: contentFadeOut }}
-              className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-center flex-grow h-full"
+              // CHANGED: justify-start pushes content to top. pt-32 prevents text hiding behind Navbar
+              className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 md:pt-40 flex flex-col justify-start flex-grow h-full"
             >
-              <div className="space-y-4 lg:space-y-6 flex flex-col items-center text-center max-w-3xl">
+              <div className="space-y-4 lg:space-y-6 flex flex-col items-start text-left max-w-3xl">
                 <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase italic">
                   Ascend. Explore. Awaken.
                 </p>
@@ -254,22 +255,13 @@ export default function Home() {
                 experiences.
               </p>
               <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group"
-                >
+                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
                   <Instagram className="w-5 h-5 group-hover:text-[#0a0f16]" />
                 </a>
-                <a
-                  href="#"
-                  className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group"
-                >
+                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
                   <Facebook className="w-5 h-5 group-hover:text-[#0a0f16]" />
                 </a>
-                <a
-                  href="#"
-                  className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group"
-                >
+                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
                   <Twitter className="w-5 h-5 group-hover:text-[#0a0f16]" />
                 </a>
               </div>
@@ -278,76 +270,20 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-serif mb-6">Quick Links</h4>
               <ul className="space-y-4 text-sm text-white/60">
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    Search Destinations
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#discover"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    Explore Map
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    Plan Your Voyage
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    Travel Stories
-                  </a>
-                </li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Search Destinations</a></li>
+                <li><a href="#discover" className="hover:text-[#d4af37] transition-colors">Explore Map</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Plan Your Voyage</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Travel Stories</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-lg font-serif mb-6">Support</h4>
               <ul className="space-y-4 text-sm text-white/60">
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
-                    Contact Us
-                  </a>
-                </li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Contact Us</a></li>
               </ul>
             </div>
 
