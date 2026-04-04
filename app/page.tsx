@@ -13,6 +13,7 @@ import {
   Phone,
 } from "lucide-react";
 
+// Data array for the destination cards displayed in the Discover section
 const destinationsData = [
   {
     id: "kandy",
@@ -43,6 +44,8 @@ const destinationsData = [
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // State to track if the user is on a mobile device for responsive animation values
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -52,14 +55,17 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Framer Motion hook to track the scroll progress of the hero container
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
+  // Animation timeline configuration
   const startAnim = isMobile ? 0.2 : 0;
   const midAnim = isMobile ? 0.8 : 0.7;
 
+  // Transform hooks mapping scroll progress to physical properties of the hero container
   const scale = useTransform(
     scrollYProgress,
     [startAnim, midAnim, 1],
@@ -76,6 +82,7 @@ export default function Home() {
     ["0px", isMobile ? "40px" : "50px", isMobile ? "40px" : "50px"]
   );
 
+  // Transform hooks for fading elements in and out during the scroll sequence
   const blackOutPoint = isMobile ? 0.1 : 0.05;
 
   const contentFadeOut = useTransform(
@@ -106,14 +113,18 @@ export default function Home() {
 
   return (
     <main id="top" className="relative bg-[#ffffff]">
-      {/* NAVBAR */}
+      
+      {/* Navigation Bar*/}
       <div className="fixed top-0 left-0 right-0 z-50">
         <Navbar />
       </div>
 
-      {/* HERO SECTION */}
+      {/* Scroll-Animated Hero Section */}
       <div ref={containerRef} className="relative h-[200vh]">
+        {/* Sticky container that holds the view while the user scrolls through the 200vh height */}
         <div className="sticky top-0 min-h-screen w-full overflow-hidden flex flex-col justify-center">
+          
+          {/* Main animated background container that scales down and rounds its corners */}
           <motion.div
             style={{
               scale,
@@ -126,13 +137,15 @@ export default function Home() {
             }}
             className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.25)] flex flex-col bg-black"
           >
+            {/* darking the background image */}
             <div className="absolute inset-0 bg-black/30 z-0"></div>
 
+            {/* Hero Content */}
             <motion.div
               style={{ opacity: contentFadeOut }}
               className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 md:pt-40 flex flex-col justify-start flex-grow h-full"
             >
-              {/* CHANGED: items-center text-center for mobile, md:items-start md:text-left for desktop */}
+              {/* Text formatting container: Centered on mobile, left-aligned on desktop */}
               <div className="space-y-4 lg:space-y-6 flex flex-col items-center text-center md:items-start md:text-left max-w-3xl">
                 <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase italic">
                   Ascend. Explore. Awaken.
@@ -156,11 +169,13 @@ export default function Home() {
               </div>
             </motion.div>
 
+            {/* Solid Black Transition Overlay (Fades in to hide the background image before the logo appears) */}
             <motion.div
               style={{ opacity: pitchBlackOverlay }}
               className="absolute inset-0 bg-[#000000] z-40 pointer-events-none"
             />
 
+            {/* Final Animated Logo (Scales and fades in over the solid black overlay) */}
             <motion.div
               style={{ opacity: textOpacity, scale: textScale }}
               className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none"
@@ -173,12 +188,14 @@ export default function Home() {
         </div>
       </div>
 
-      {/* DISCOVER SECTION */}
+      {/* Discover Section */}
       <section
         id="discover"
         className="relative z-10 bg-[#F9F7F2] py-24 px-6 lg:px-12 border-t border-black/5 scroll-mt-20"
       >
         <div className="max-w-7xl mx-auto space-y-24 lg:space-y-40">
+          
+          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -192,6 +209,7 @@ export default function Home() {
             <div className="h-1 w-24 bg-[#d4af37] mx-auto"></div>
           </motion.div>
 
+          {/* Destination Cards Loop */}
           {destinationsData.map((dest, idx) => {
             const isEven = idx % 2 === 0;
             return (
@@ -201,10 +219,12 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.7 }}
+                // Alternates the layout direction (image left vs image right) based on index
                 className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${
                   !isEven ? "lg:flex-row-reverse" : ""
                 }`}
               >
+                {/* Image Container */}
                 <div className="w-full lg:w-[40%] overflow-hidden rounded-2xl shadow-xl h-[250px] lg:h-[320px]">
                   <motion.img
                     whileHover={{ scale: 1.05 }}
@@ -215,6 +235,7 @@ export default function Home() {
                   />
                 </div>
 
+                {/* Text Content Container */}
                 <div className="w-full lg:w-[60%] space-y-6 flex flex-col items-start text-left">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-[#d4af37]" />
@@ -241,10 +262,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* Footer */}
       <footer className="relative z-10 bg-[#0a0f16] text-white pt-20 pb-10 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
+          {/* Main Footer Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            {/* Branding & Social Links Column */}
             <div className="space-y-6">
               <div className="text-2xl font-sans font-bold tracking-tight">
                 Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
@@ -267,6 +291,7 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Quick Links Column */}
             <div>
               <h4 className="text-lg font-serif mb-6">Quick Links</h4>
               <ul className="space-y-4 text-sm text-white/60">
@@ -277,6 +302,7 @@ export default function Home() {
               </ul>
             </div>
 
+            {/* Support/Legal Column */}
             <div>
               <h4 className="text-lg font-serif mb-6">Support</h4>
               <ul className="space-y-4 text-sm text-white/60">
@@ -287,6 +313,7 @@ export default function Home() {
               </ul>
             </div>
 
+            {/* Contact Information Column */}
             <div>
               <h4 className="text-lg font-serif mb-6">Get in Touch</h4>
               <div className="space-y-4 text-sm text-white/60">
@@ -306,6 +333,7 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Bottom Copyright Bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40 uppercase tracking-widest">
             <p>© 2026 CeylonSync. All Rights Reserved.</p>
             <p>Designed for the Modern Explorer</p>
@@ -313,6 +341,7 @@ export default function Home() {
         </div>
       </footer>
 
+      {/* Image Preloader */}
       <div className="hidden" aria-hidden="true">
         {destinationsData.map((dest) => (
           <img key={dest.id} src={dest.imageUrl} alt="" />
