@@ -63,45 +63,45 @@ export default function Home() {
   const scale = useTransform(
     scrollYProgress,
     [startAnim, midAnim, 1],
-    [1, 0.65, 0.65]
+    [1, 0.65, 0.65],
   );
   const y = useTransform(
     scrollYProgress,
     [startAnim, midAnim, 1],
-    ["0vh", isMobile ? "28vh" : "12vh", isMobile ? "28vh" : "12vh"]
+    ["0vh", isMobile ? "28vh" : "12vh", isMobile ? "28vh" : "12vh"],
   );
   const borderRadius = useTransform(
     scrollYProgress,
     [startAnim, midAnim, 1],
-    ["0px", isMobile ? "40px" : "50px", isMobile ? "40px" : "50px"]
+    ["0px", isMobile ? "40px" : "50px", isMobile ? "40px" : "50px"],
   );
 
-  const blackOutPoint = isMobile ? 0.10 : 0.05;
+  const blackOutPoint = isMobile ? 0.1 : 0.05;
 
   const contentFadeOut = useTransform(
     scrollYProgress,
     [startAnim, blackOutPoint],
-    [1, 0]
+    [1, 0],
   );
 
   const pitchBlackOverlay = useTransform(
     scrollYProgress,
     [startAnim, blackOutPoint],
-    [0, 1]
+    [0, 1],
   );
 
-  const textStart = blackOutPoint; 
-  const textMid = isMobile ? 0.25 : 0.15; 
+  const textStart = blackOutPoint;
+  const textMid = isMobile ? 0.25 : 0.15;
 
   const textOpacity = useTransform(
     scrollYProgress,
     [textStart, textMid, 1],
-    [0, 1, 1]
+    [0, 1, 1],
   );
   const textScale = useTransform(
     scrollYProgress,
     [textStart, textMid, 1],
-    [0.8, 1, 1]
+    [0.8, 1, 1],
   );
 
   return (
@@ -114,23 +114,21 @@ export default function Home() {
       {/* HERO SECTION */}
       <div ref={containerRef} className="relative h-[200vh]">
         <div className="sticky top-0 min-h-screen w-full overflow-hidden flex flex-col justify-center">
-          
           <motion.div
             style={{
               scale,
               y,
               borderRadius,
               transformOrigin: "top center",
-              /* Add your background image path here */
-              backgroundImage: "url('/images/background.png')",
+              backgroundImage: isMobile
+                ? "url('/images/backgroundPhone.png')"
+                : "url('/images/background.png')",
             }}
             className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.25)] flex flex-col bg-black"
           >
-            {/* Background Image Darkener Overlay */}
-            {/* <div className="absolute inset-0 bg-black/30 z-0"></div> */}
+            <div className="absolute inset-0 bg-black/30 z-0"></div>
 
-            {/* Hero Text Content */}
-            <motion.div 
+            <motion.div
               style={{ opacity: contentFadeOut }}
               className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col justify-center flex-grow h-full"
             >
@@ -140,12 +138,14 @@ export default function Home() {
                 </p>
                 <h1 className="text-white text-4xl sm:text-5xl lg:text-7xl leading-tight font-serif">
                   Your Immersive Journey <br className="hidden sm:block" />{" "}
-                  Through Sri Lanka <br className="hidden sm:block" /> Begins Here.
+                  Through Sri Lanka <br className="hidden sm:block" /> Begins
+                  Here.
                 </h1>
                 <button
                   className="group flex items-center gap-2 px-8 py-4 mt-4 rounded-full text-[#3A2E12] font-semibold text-sm tracking-wide hover:scale-105 transition-transform"
                   style={{
-                    background: "linear-gradient(135deg, #d4af37, #f2d388, #d4af37)",
+                    background:
+                      "linear-gradient(135deg, #d4af37, #f2d388, #d4af37)",
                     boxShadow: "0 4px 20px rgba(212, 175, 55, 0.4)",
                   }}
                 >
@@ -155,13 +155,11 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Pitch Black Scroll Overlay */}
             <motion.div
               style={{ opacity: pitchBlackOverlay }}
               className="absolute inset-0 bg-[#000000] z-40 pointer-events-none"
             />
 
-            {/* Centered Scroll Logo */}
             <motion.div
               style={{ opacity: textOpacity, scale: textScale }}
               className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none"
@@ -256,13 +254,22 @@ export default function Home() {
                 experiences.
               </p>
               <div className="flex gap-4">
-                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                <a
+                  href="#"
+                  className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group"
+                >
                   <Instagram className="w-5 h-5 group-hover:text-[#0a0f16]" />
                 </a>
-                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                <a
+                  href="#"
+                  className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group"
+                >
                   <Facebook className="w-5 h-5 group-hover:text-[#0a0f16]" />
                 </a>
-                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                <a
+                  href="#"
+                  className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group"
+                >
                   <Twitter className="w-5 h-5 group-hover:text-[#0a0f16]" />
                 </a>
               </div>
@@ -271,20 +278,76 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-serif mb-6">Quick Links</h4>
               <ul className="space-y-4 text-sm text-white/60">
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Search Destinations</a></li>
-                <li><a href="#discover" className="hover:text-[#d4af37] transition-colors">Explore Map</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Plan Your Voyage</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Travel Stories</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    Search Destinations
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#discover"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    Explore Map
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    Plan Your Voyage
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    Travel Stories
+                  </a>
+                </li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-lg font-serif mb-6">Support</h4>
               <ul className="space-y-4 text-sm text-white/60">
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Contact Us</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#d4af37] transition-colors"
+                  >
+                    Contact Us
+                  </a>
+                </li>
               </ul>
             </div>
 
