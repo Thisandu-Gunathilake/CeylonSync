@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+// Removed AnimatePresence since we no longer need a fade-out animation
 import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "../components/Navbar";
 import {
@@ -48,11 +49,25 @@ export default function Home() {
   // State to track if the user is on a mobile device for responsive animation values
   const [isMobile, setIsMobile] = useState(false);
 
+  // State to control the Splash Screen visibility
+  const [showSplash, setShowSplash] = useState(true);
+
   useEffect(() => {
+    // Check if the user is on a mobile screen for responsive background images and animations
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+
+    // Timer to hide the splash screen instantly after 3 seconds (adjust to match your GIF duration)
+    const splashTimer = setTimeout(() => {
+      setShowSplash(false);
+    }, 3000);
+
+    // Cleanup listeners and timers when the component unmounts
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      clearTimeout(splashTimer);
+    };
   }, []);
 
   // Framer Motion hook to track the scroll progress of the hero container
@@ -61,7 +76,7 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  // Animation timeline configuration
+  // Animation timeline configuration mapped to scroll progress
   const startAnim = isMobile ? 0.2 : 0;
   const midAnim = isMobile ? 0.8 : 0.7;
 
@@ -112,241 +127,256 @@ export default function Home() {
   );
 
   return (
-    <main id="top" className="relative bg-[#ffffff]">
-      
-      {/* Navigation Bar*/}
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <Navbar />
-      </div>
-
-      {/* Scroll-Animated Hero Section */}
-      <div ref={containerRef} className="relative h-[200vh]">
-        {/* Sticky container that holds the view while the user scrolls through the 200vh height */}
-        <div className="sticky top-0 min-h-screen w-full overflow-hidden flex flex-col justify-center">
-          
-          {/* Main animated background container that scales down and rounds its corners */}
-          <motion.div
-            style={{
-              scale,
-              y,
-              borderRadius,
-              transformOrigin: "top center",
-              backgroundImage: isMobile
-                ? "url('/images/backgroundPhone.png')"
-                : "url('/images/background.png')",
-            }}
-            className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.25)] flex flex-col bg-black"
-          >
-            {/* darking the background image */}
-            <div className="absolute inset-0 bg-black/30 z-0"></div>
-
-            {/* Hero Content */}
-            <motion.div
-              style={{ opacity: contentFadeOut }}
-              className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 md:pt-40 flex flex-col justify-start flex-grow h-full"
-            >
-              {/* Text formatting container: Centered on mobile, left-aligned on desktop */}
-              <div className="space-y-4 lg:space-y-6 flex flex-col items-center text-center md:items-start md:text-left max-w-3xl">
-                <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase italic">
-                  Ascend. Explore. Awaken.
-                </p>
-                <h1 className="text-white text-4xl sm:text-5xl lg:text-7xl leading-tight font-serif">
-                  Your Immersive Journey <br className="hidden sm:block" />{" "}
-                  Through Sri Lanka <br className="hidden sm:block" /> Begins
-                  Here.
-                </h1>
-                <button
-                  className="group flex items-center gap-2 px-8 py-4 mt-4 rounded-full text-[#3A2E12] font-semibold text-sm tracking-wide hover:scale-105 transition-transform"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #d4af37, #f2d388, #d4af37)",
-                    boxShadow: "0 4px 20px rgba(212, 175, 55, 0.4)",
-                  }}
-                >
-                  PLAN YOUR VOYAGE{" "}
-                  <ArrowUpRight className="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </button>
-              </div>
-            </motion.div>
-
-            {/* Solid Black Transition Overlay (Fades in to hide the background image before the logo appears) */}
-            <motion.div
-              style={{ opacity: pitchBlackOverlay }}
-              className="absolute inset-0 bg-[#000000] z-40 pointer-events-none"
-            />
-
-            {/* Final Animated Logo (Scales and fades in over the solid black overlay) */}
-            <motion.div
-              style={{ opacity: textOpacity, scale: textScale }}
-              className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none"
-            >
-              <h1 className="text-white text-5xl lg:text-8xl font-sans font-semibold tracking-widest uppercase drop-shadow-2xl text-center">
-                Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
-              </h1>
-            </motion.div>
-          </motion.div>
+    <>
+      {/* SPLASH SCREEN: Instantly disappears when showSplash becomes false (No fade out) */}
+      {showSplash && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
+          <img
+            src="/images/logoAnimation.gif"
+            alt="CeylonSync Loading Animation"
+            className="w-64 md:w-96 h-auto object-contain"
+          />
         </div>
-      </div>
+      )}
 
-      {/* Discover Section */}
-      <section
-        id="discover"
-        className="relative z-10 bg-[#F9F7F2] py-24 px-6 lg:px-12 border-t border-black/5 scroll-mt-20"
-      >
-        <div className="max-w-7xl mx-auto space-y-24 lg:space-y-40">
-          
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-[#0a0f16] text-4xl lg:text-6xl font-serif mb-6 italic">
-              Discover the Soul of the Island
-            </h2>
-            <div className="h-1 w-24 bg-[#d4af37] mx-auto"></div>
-          </motion.div>
+      {/* MAIN APPLICATION */}
+      <main id="top" className="relative bg-[#ffffff]">
+        
+        {/* FIXED NAVIGATION */}
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <Navbar />
+        </div>
 
-          {/* Destination Cards Loop */}
-          {destinationsData.map((dest, idx) => {
-            const isEven = idx % 2 === 0;
-            return (
+        {/* SCROLL-ANIMATED HERO SECTION */}
+        <div ref={containerRef} className="relative h-[200vh]">
+          {/* Sticky container that holds the view while the user scrolls through the 200vh height */}
+          <div className="sticky top-0 min-h-screen w-full overflow-hidden flex flex-col justify-center">
+            
+            {/* Main animated background container that scales down and rounds its corners */}
+            <motion.div
+              style={{
+                scale,
+                y,
+                borderRadius,
+                transformOrigin: "top center",
+                // Dynamically swap background image based on screen size
+                backgroundImage: isMobile
+                  ? "url('/images/backgroundPhone.png')"
+                  : "url('/images/background.png')",
+              }}
+              className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.25)] flex flex-col bg-black"
+            >
+              {/* Subtle dark overlay to ensure text readability against the background image */}
+              <div className="absolute inset-0 bg-black/30 z-0"></div>
+
+              {/* Initial Hero Content (Fades out as the user begins to scroll) */}
               <motion.div
-                key={dest.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7 }}
-                // Alternates the layout direction (image left vs image right) based on index
-                className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${
-                  !isEven ? "lg:flex-row-reverse" : ""
-                }`}
+                style={{ opacity: contentFadeOut }}
+                className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 md:pt-40 flex flex-col justify-start flex-grow h-full"
               >
-                {/* Image Container */}
-                <div className="w-full lg:w-[40%] overflow-hidden rounded-2xl shadow-xl h-[250px] lg:h-[320px]">
-                  <motion.img
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.6 }}
-                    src={dest.imageUrl}
-                    alt={dest.id}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Text Content Container */}
-                <div className="w-full lg:w-[60%] space-y-6 flex flex-col items-start text-left">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-[#d4af37]" />
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#d4af37]">
-                      {dest.id}
-                    </span>
-                  </div>
-
-                  <h3 className="text-3xl lg:text-5xl font-serif capitalize text-[#0a0f16]">
-                    {dest.id}
-                  </h3>
-
-                  <p className="text-[#0a0f16]/70 text-lg leading-relaxed font-sans max-w-xl">
-                    {dest.desc}
+                {/* Text formatting container: Centered on mobile, left-aligned on desktop */}
+                <div className="space-y-4 lg:space-y-6 flex flex-col items-center text-center md:items-start md:text-left max-w-3xl">
+                  <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase italic">
+                    Ascend. Explore. Awaken.
                   </p>
-
-                  <button className="flex items-center gap-2 text-sm font-bold tracking-widest text-[#0a0f16] uppercase border-b-2 border-[#d4af37] pb-1 hover:text-[#d4af37] transition-all">
-                    Explore Details <ArrowUpRight className="w-4 h-4" />
+                  <h1 className="text-white text-4xl sm:text-5xl lg:text-7xl leading-tight font-serif">
+                    Your Immersive Journey <br className="hidden sm:block" />{" "}
+                    Through Sri Lanka <br className="hidden sm:block" /> Begins
+                    Here.
+                  </h1>
+                  <button
+                    className="group flex items-center gap-2 px-8 py-4 mt-4 rounded-full text-[#3A2E12] font-semibold text-sm tracking-wide hover:scale-105 transition-transform"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #d4af37, #f2d388, #d4af37)",
+                      boxShadow: "0 4px 20px rgba(212, 175, 55, 0.4)",
+                    }}
+                  >
+                    PLAN YOUR VOYAGE{" "}
+                    <ArrowUpRight className="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </button>
                 </div>
               </motion.div>
-            );
-          })}
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 bg-[#0a0f16] text-white pt-20 pb-10 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          {/* Main Footer Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+              {/* Solid Black Transition Overlay (Fades in to hide the background image before the logo appears) */}
+              <motion.div
+                style={{ opacity: pitchBlackOverlay }}
+                className="absolute inset-0 bg-[#000000] z-40 pointer-events-none"
+              />
+
+              {/* Final Animated Logo (Scales and fades in over the solid black overlay at peak scroll) */}
+              <motion.div
+                style={{ opacity: textOpacity, scale: textScale }}
+                className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none"
+              >
+                <h1 className="text-white text-5xl lg:text-8xl font-sans font-semibold tracking-widest uppercase drop-shadow-2xl text-center">
+                  Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
+                </h1>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* DISCOVER DESTINATIONS SECTION */}
+        <section
+          id="discover"
+          className="relative z-10 bg-[#F9F7F2] py-24 px-6 lg:px-12 border-t border-black/5 scroll-mt-20"
+        >
+          <div className="max-w-7xl mx-auto space-y-24 lg:space-y-40">
             
-            {/* Branding & Social Links Column */}
-            <div className="space-y-6">
-              <div className="text-2xl font-sans font-bold tracking-tight">
-                Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-[#0a0f16] text-4xl lg:text-6xl font-serif mb-6 italic">
+                Discover the Soul of the Island
+              </h2>
+              <div className="h-1 w-24 bg-[#d4af37] mx-auto"></div>
+            </motion.div>
+
+            {/* Destination Cards Loop */}
+            {destinationsData.map((dest, idx) => {
+              const isEven = idx % 2 === 0;
+              return (
+                <motion.div
+                  key={dest.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.7 }}
+                  // Alternates the layout direction (image left vs image right) based on index
+                  className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${
+                    !isEven ? "lg:flex-row-reverse" : ""
+                  }`}
+                >
+                  {/* Image Container */}
+                  <div className="w-full lg:w-[40%] overflow-hidden rounded-2xl shadow-xl h-[250px] lg:h-[320px]">
+                    <motion.img
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.6 }}
+                      src={dest.imageUrl}
+                      alt={dest.id}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Text Content Container */}
+                  <div className="w-full lg:w-[60%] space-y-6 flex flex-col items-start text-left">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-[#d4af37]" />
+                      <span className="text-xs font-bold uppercase tracking-widest text-[#d4af37]">
+                        {dest.id}
+                      </span>
+                    </div>
+
+                    <h3 className="text-3xl lg:text-5xl font-serif capitalize text-[#0a0f16]">
+                      {dest.id}
+                    </h3>
+
+                    <p className="text-[#0a0f16]/70 text-lg leading-relaxed font-sans max-w-xl">
+                      {dest.desc}
+                    </p>
+
+                    <button className="flex items-center gap-2 text-sm font-bold tracking-widest text-[#0a0f16] uppercase border-b-2 border-[#d4af37] pb-1 hover:text-[#d4af37] transition-all">
+                      Explore Details <ArrowUpRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* SITE FOOTER */}
+        <footer className="relative z-10 bg-[#0a0f16] text-white pt-20 pb-10 px-6 lg:px-12 border-t border-white/5">
+          <div className="max-w-7xl mx-auto">
+            {/* Main Footer Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+              
+              {/* Branding & Social Links Column */}
+              <div className="space-y-6">
+                <div className="text-2xl font-sans font-bold tracking-tight">
+                  Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
+                </div>
+                <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+                  Crafting immersive digital journeys through the heart of Sri
+                  Lanka. Discover the island&apos;s soul with our curated travel
+                  experiences.
+                </p>
+                <div className="flex gap-4">
+                  <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                    <Instagram className="w-5 h-5 group-hover:text-[#0a0f16]" />
+                  </a>
+                  <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                    <Facebook className="w-5 h-5 group-hover:text-[#0a0f16]" />
+                  </a>
+                  <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
+                    <Twitter className="w-5 h-5 group-hover:text-[#0a0f16]" />
+                  </a>
+                </div>
               </div>
-              <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-                Crafting immersive digital journeys through the heart of Sri
-                Lanka. Discover the island&apos;s soul with our curated travel
-                experiences.
-              </p>
-              <div className="flex gap-4">
-                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
-                  <Instagram className="w-5 h-5 group-hover:text-[#0a0f16]" />
-                </a>
-                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
-                  <Facebook className="w-5 h-5 group-hover:text-[#0a0f16]" />
-                </a>
-                <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#d4af37] transition-colors group">
-                  <Twitter className="w-5 h-5 group-hover:text-[#0a0f16]" />
-                </a>
+
+              {/* Quick Links Column */}
+              <div>
+                <h4 className="text-lg font-serif mb-6">Quick Links</h4>
+                <ul className="space-y-4 text-sm text-white/60">
+                  <li><a href="#" className="hover:text-[#d4af37] transition-colors">Search Destinations</a></li>
+                  <li><a href="#discover" className="hover:text-[#d4af37] transition-colors">Explore Map</a></li>
+                  <li><a href="#" className="hover:text-[#d4af37] transition-colors">Plan Your Voyage</a></li>
+                  <li><a href="#" className="hover:text-[#d4af37] transition-colors">Travel Stories</a></li>
+                </ul>
+              </div>
+
+              {/* Support/Legal Column */}
+              <div>
+                <h4 className="text-lg font-serif mb-6">Support</h4>
+                <ul className="space-y-4 text-sm text-white/60">
+                  <li><a href="#" className="hover:text-[#d4af37] transition-colors">About Us</a></li>
+                  <li><a href="#" className="hover:text-[#d4af37] transition-colors">Privacy Policy</a></li>
+                  <li><a href="#" className="hover:text-[#d4af37] transition-colors">Terms of Service</a></li>
+                  <li><a href="#" className="hover:text-[#d4af37] transition-colors">Contact Us</a></li>
+                </ul>
+              </div>
+
+              {/* Contact Information Column */}
+              <div>
+                <h4 className="text-lg font-serif mb-6">Get in Touch</h4>
+                <div className="space-y-4 text-sm text-white/60">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-[#d4af37] shrink-0" />
+                    <span>Colombo, Sri Lanka</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-5 h-5 text-[#d4af37] shrink-0" />
+                    <span>+94 70 449 0944</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-[#d4af37] shrink-0" />
+                    <span>thisandugunathilake12345@gmail.com</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Quick Links Column */}
-            <div>
-              <h4 className="text-lg font-serif mb-6">Quick Links</h4>
-              <ul className="space-y-4 text-sm text-white/60">
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Search Destinations</a></li>
-                <li><a href="#discover" className="hover:text-[#d4af37] transition-colors">Explore Map</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Plan Your Voyage</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Travel Stories</a></li>
-              </ul>
-            </div>
-
-            {/* Support/Legal Column */}
-            <div>
-              <h4 className="text-lg font-serif mb-6">Support</h4>
-              <ul className="space-y-4 text-sm text-white/60">
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-[#d4af37] transition-colors">Contact Us</a></li>
-              </ul>
-            </div>
-
-            {/* Contact Information Column */}
-            <div>
-              <h4 className="text-lg font-serif mb-6">Get in Touch</h4>
-              <div className="space-y-4 text-sm text-white/60">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#d4af37] shrink-0" />
-                  <span>Colombo, Sri Lanka</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-[#d4af37] shrink-0" />
-                  <span>+94 70 449 0944</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-[#d4af37] shrink-0" />
-                  <span>thisandugunathilake12345@gmail.com</span>
-                </div>
-              </div>
+            {/* Bottom Copyright Bar */}
+            <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40 uppercase tracking-widest">
+              <p>© 2026 CeylonSync. All Rights Reserved.</p>
+              <p>Designed for the Modern Explorer</p>
             </div>
           </div>
+        </footer>
 
-          {/* Bottom Copyright Bar */}
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40 uppercase tracking-widest">
-            <p>© 2026 CeylonSync. All Rights Reserved.</p>
-            <p>Designed for the Modern Explorer</p>
-          </div>
+        {/* HIDDEN IMAGE PRELOADER - Pre-fetches images to prevent popping/flickering during scroll reveals */}
+        <div className="hidden" aria-hidden="true">
+          {destinationsData.map((dest) => (
+            <img key={dest.id} src={dest.imageUrl} alt="" />
+          ))}
         </div>
-      </footer>
-
-      {/* Image Preloader */}
-      <div className="hidden" aria-hidden="true">
-        {destinationsData.map((dest) => (
-          <img key={dest.id} src={dest.imageUrl} alt="" />
-        ))}
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
