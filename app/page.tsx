@@ -63,45 +63,45 @@ export default function Home() {
   const scale = useTransform(
     scrollYProgress,
     [startAnim, midAnim, 1],
-    [1, 0.65, 0.65],
+    [1, 0.65, 0.65]
   );
   const y = useTransform(
     scrollYProgress,
     [startAnim, midAnim, 1],
-    ["0vh", isMobile ? "28vh" : "12vh", isMobile ? "28vh" : "12vh"],
+    ["0vh", isMobile ? "28vh" : "12vh", isMobile ? "28vh" : "12vh"]
   );
   const borderRadius = useTransform(
     scrollYProgress,
     [startAnim, midAnim, 1],
-    ["0px", isMobile ? "40px" : "50px", isMobile ? "40px" : "50px"],
+    ["0px", isMobile ? "40px" : "50px", isMobile ? "40px" : "50px"]
   );
 
-  const blackOutPoint = isMobile ? 0.1 : 0.05;
+  const blackOutPoint = isMobile ? 0.10 : 0.05;
 
   const contentFadeOut = useTransform(
     scrollYProgress,
     [startAnim, blackOutPoint],
-    [1, 0],
+    [1, 0]
   );
 
   const pitchBlackOverlay = useTransform(
     scrollYProgress,
     [startAnim, blackOutPoint],
-    [0, 1],
+    [0, 1]
   );
 
-  const textStart = blackOutPoint;
-  const textMid = isMobile ? 0.25 : 0.15;
+  const textStart = blackOutPoint; 
+  const textMid = isMobile ? 0.25 : 0.15; 
 
   const textOpacity = useTransform(
     scrollYProgress,
     [textStart, textMid, 1],
-    [0, 1, 1],
+    [0, 1, 1]
   );
   const textScale = useTransform(
     scrollYProgress,
     [textStart, textMid, 1],
-    [0.8, 1, 1],
+    [0.8, 1, 1]
   );
 
   return (
@@ -128,11 +128,11 @@ export default function Home() {
           >
             <div className="absolute inset-0 bg-black/30 z-0"></div>
 
-            <motion.div
+            <motion.div 
               style={{ opacity: contentFadeOut }}
-              className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col justify-center flex-grow h-full"
+              className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-center flex-grow h-full"
             >
-              <div className="space-y-4 lg:space-y-6 flex flex-col items-start text-left max-w-3xl">
+              <div className="space-y-4 lg:space-y-6 flex flex-col items-center text-center max-w-3xl">
                 <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase italic">
                   Ascend. Explore. Awaken.
                 </p>
