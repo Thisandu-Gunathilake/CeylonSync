@@ -58,8 +58,8 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  const startAnim = isMobile ? 0.3 : 0;
-  const midAnim = isMobile ? 0.55 : 0.4;
+  const startAnim = isMobile ? 0.2 : 0;
+  const midAnim = isMobile ? 0.8 : 0.7; // Snappier end for the shrinking animation
 
   const scale = useTransform(
     scrollYProgress,
@@ -78,12 +78,13 @@ export default function Home() {
   );
   const overlayOpacity = useTransform(
     scrollYProgress,
-    [startAnim, isMobile ? 0.5 : 0.3, 1],
+    [startAnim, isMobile ? 0.5 : 0.4, 1],
     [0, 0.9, 0.9],
   );
 
-  const textStart = isMobile ? 0.35 : 0.05;
-  const textMid = isMobile ? 0.55 : 0.35;
+  const textStart = isMobile ? 0.25 : 0.05;
+  const textMid = isMobile ? 0.5 : 0.35;
+
   const textOpacity = useTransform(
     scrollYProgress,
     [textStart, textMid, 1],
@@ -96,13 +97,13 @@ export default function Home() {
   );
 
   return (
-    /* ADDED id="top" so the Navbar logo can navigate back here */
     <main id="top" className="relative bg-[#ffffff]">
       <div className="fixed top-0 left-0 right-0 z-50">
         <Navbar />
       </div>
 
-      <div ref={containerRef} className="relative h-[400vh]">
+      {/* CHANGED: Track height reduced from 400vh to 200vh for snappier scrolling */}
+      <div ref={containerRef} className="relative h-[200vh]">
         <div className="sticky top-0 min-h-screen w-full overflow-hidden flex flex-col justify-center">
           <motion.div
             style={{
@@ -142,9 +143,6 @@ export default function Home() {
                   <div className="relative w-full h-[250px] sm:h-[400px] lg:h-[650px] flex items-center justify-center overflow-visible scale-65 sm:scale-100">
                     <FloatingMap />
                   </div>
-                  {/* <p className="text-white/70 text-[10px] lg:text-sm tracking-[0.2em] font-light animate-pulse uppercase mt-0 -translate-y-2 lg:translate-y-0 lg:-mt-20 lg:translate-x-32">
-                    Click on dots in the map
-                  </p> */}
                 </div>
               </div>
             </div>
@@ -164,7 +162,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ALTERNATING CONTENT SECTION - Ensure id="discover" and scroll-mt-20 are present */}
       <section
         id="discover"
         className="relative z-10 bg-[#F9F7F2] py-24 px-6 lg:px-12 border-t border-black/5 scroll-mt-20"
@@ -192,7 +189,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.7 }}
-                className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${!isEven ? "lg:flex-row-reverse" : ""}`}
+                className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${
+                  !isEven ? "lg:flex-row-reverse" : ""
+                }`}
               >
                 <div className="w-full lg:w-[40%] overflow-hidden rounded-2xl shadow-xl h-[250px] lg:h-[320px]">
                   <motion.img
@@ -230,7 +229,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER START */}
       <footer className="relative z-10 bg-[#0a0f16] text-white pt-20 pb-10 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -239,7 +237,6 @@ export default function Home() {
                 Ceylon<span style={{ color: "#d4af37" }}>Sync</span>
               </div>
               <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-                {/* FIXED APOSTROPHE ERROR BY USING &apos; */}
                 Crafting immersive digital journeys through the heart of Sri
                 Lanka. Discover the island&apos;s soul with our curated travel
                 experiences.
@@ -270,10 +267,7 @@ export default function Home() {
               <h4 className="text-lg font-serif mb-6">Quick Links</h4>
               <ul className="space-y-4 text-sm text-white/60">
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#d4af37] transition-colors">
                     Search Destinations
                   </a>
                 </li>
@@ -286,18 +280,12 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#d4af37] transition-colors">
                     Plan Your Voyage
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#d4af37] transition-colors">
                     Travel Stories
                   </a>
                 </li>
@@ -308,34 +296,22 @@ export default function Home() {
               <h4 className="text-lg font-serif mb-6">Support</h4>
               <ul className="space-y-4 text-sm text-white/60">
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#d4af37] transition-colors">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#d4af37] transition-colors">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#d4af37] transition-colors">
                     Terms of Service
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-[#d4af37] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#d4af37] transition-colors">
                     Contact Us
                   </a>
                 </li>
