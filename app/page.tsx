@@ -76,7 +76,7 @@ export default function Home() {
     ["0px", isMobile ? "40px" : "50px", isMobile ? "40px" : "50px"]
   );
 
-  const blackOutPoint = isMobile ? 0.10 : 0.05;
+  const blackOutPoint = isMobile ? 0.1 : 0.05;
 
   const contentFadeOut = useTransform(
     scrollYProgress,
@@ -90,8 +90,8 @@ export default function Home() {
     [0, 1]
   );
 
-  const textStart = blackOutPoint; 
-  const textMid = isMobile ? 0.25 : 0.15; 
+  const textStart = blackOutPoint;
+  const textMid = isMobile ? 0.25 : 0.15;
 
   const textOpacity = useTransform(
     scrollYProgress,
@@ -114,38 +114,39 @@ export default function Home() {
       {/* HERO SECTION */}
       <div ref={containerRef} className="relative h-[200vh]">
         <div className="sticky top-0 min-h-screen w-full overflow-hidden flex flex-col justify-center">
-          
           <motion.div
             style={{
               scale,
               y,
               borderRadius,
               transformOrigin: "top center",
-              /* Add your background image path here */
-              backgroundImage: "url('/images/background.png')",
+              backgroundImage: isMobile
+                ? "url('/images/backgroundPhone.png')"
+                : "url('/images/background.png')",
             }}
             className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.25)] flex flex-col bg-black"
           >
-            {/* Background Image Darkener Overlay */}
-            {/* <div className="absolute inset-0 bg-black/30 z-0"></div> */}
+            <div className="absolute inset-0 bg-black/30 z-0"></div>
 
-            {/* Hero Text Content */}
-            <motion.div 
+            <motion.div
               style={{ opacity: contentFadeOut }}
-              className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col justify-center flex-grow h-full"
+              className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 md:pt-40 flex flex-col justify-start flex-grow h-full"
             >
-              <div className="space-y-4 lg:space-y-6 flex flex-col items-start text-left max-w-3xl">
+              {/* CHANGED: items-center text-center for mobile, md:items-start md:text-left for desktop */}
+              <div className="space-y-4 lg:space-y-6 flex flex-col items-center text-center md:items-start md:text-left max-w-3xl">
                 <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase italic">
                   Ascend. Explore. Awaken.
                 </p>
                 <h1 className="text-white text-4xl sm:text-5xl lg:text-7xl leading-tight font-serif">
                   Your Immersive Journey <br className="hidden sm:block" />{" "}
-                  Through Sri Lanka <br className="hidden sm:block" /> Begins Here.
+                  Through Sri Lanka <br className="hidden sm:block" /> Begins
+                  Here.
                 </h1>
                 <button
                   className="group flex items-center gap-2 px-8 py-4 mt-4 rounded-full text-[#3A2E12] font-semibold text-sm tracking-wide hover:scale-105 transition-transform"
                   style={{
-                    background: "linear-gradient(135deg, #d4af37, #f2d388, #d4af37)",
+                    background:
+                      "linear-gradient(135deg, #d4af37, #f2d388, #d4af37)",
                     boxShadow: "0 4px 20px rgba(212, 175, 55, 0.4)",
                   }}
                 >
@@ -155,13 +156,11 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Pitch Black Scroll Overlay */}
             <motion.div
               style={{ opacity: pitchBlackOverlay }}
               className="absolute inset-0 bg-[#000000] z-40 pointer-events-none"
             />
 
-            {/* Centered Scroll Logo */}
             <motion.div
               style={{ opacity: textOpacity, scale: textScale }}
               className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none"
