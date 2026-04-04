@@ -76,7 +76,7 @@ export default function Home() {
     ["0px", isMobile ? "40px" : "50px", isMobile ? "40px" : "50px"]
   );
 
-  const blackOutPoint = isMobile ? 0.10 : 0.05;
+  const blackOutPoint = isMobile ? 0.1 : 0.05;
 
   const contentFadeOut = useTransform(
     scrollYProgress,
@@ -90,8 +90,8 @@ export default function Home() {
     [0, 1]
   );
 
-  const textStart = blackOutPoint; 
-  const textMid = isMobile ? 0.25 : 0.15; 
+  const textStart = blackOutPoint;
+  const textMid = isMobile ? 0.25 : 0.15;
 
   const textOpacity = useTransform(
     scrollYProgress,
@@ -128,12 +128,12 @@ export default function Home() {
           >
             <div className="absolute inset-0 bg-black/30 z-0"></div>
 
-            <motion.div 
+            <motion.div
               style={{ opacity: contentFadeOut }}
-              // CHANGED: justify-start pushes content to top. pt-32 prevents text hiding behind Navbar
               className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 md:pt-40 flex flex-col justify-start flex-grow h-full"
             >
-              <div className="space-y-4 lg:space-y-6 flex flex-col items-start text-left max-w-3xl">
+              {/* CHANGED: items-center text-center for mobile, md:items-start md:text-left for desktop */}
+              <div className="space-y-4 lg:space-y-6 flex flex-col items-center text-center md:items-start md:text-left max-w-3xl">
                 <p className="text-white/80 tracking-widest text-xs lg:text-sm font-medium uppercase italic">
                   Ascend. Explore. Awaken.
                 </p>
